@@ -4,16 +4,18 @@ Video:  Chapter 2 Part 5
 User-Defined Types
 
 Create a branch named Part1
-  
+
 Purpose: The entire purpose of this 5-part project is to get you writing C++ code that compiles and to reinforce the syntax habits that C++ requires.  What you create in this project will be used as the basis of Project 5 in the course.   
 
 1) write 10 user-defined types in plain english
    - This step will involve several checkpoints before it is complete.
 
+
 Checkpoint 1:
     Fill in #1 - 4 with a random UDT in plain english
     These 4 UDTs do not need to be related.
     For each plain-english UDT, write out 3 things it can do, and 5 traits or properties.
+
 
 ************************
     Commit after you complete this step so i can review before you proceed
@@ -173,7 +175,65 @@ struct CarWash //2)
 
 
 /*
-1)
+1) Delay
+5 properties:
+    1) time knob
+    2) feedback knob
+    3) repeat knob
+    4) spread knob
+    5) dry/wet knob
+3 things it can do:
+    1) repeat the signal
+    2) feedback the signal
+    3) spread the signal
+ */
+
+
+/*
+2) Filter
+5 properties:
+    1) frequence knob
+    2) resonance knob
+    3) modulation knob
+    4) lfo knob
+    5) filter typ knob
+3 things it can do:
+    1) cut out frequencies 
+    2) modulate frequencies
+    3) color the sound 
+ */
+
+
+/*
+3) - Synthesizer
+5 properties:
+    1) oscillator
+    2) adsr
+    3) filter
+    4) midi input / output
+    5) audio output
+3 things it can do:
+    1) create sounds
+    2) send midi
+    3) manipulate the sound with adsr evelopes
+ */
+
+/*
+4) DrumMachine
+5 properties:
+    1) bassdrum
+    2) snare
+    3) tom
+    4) hihat
+    5) sequencer
+3 things it can do:
+    1) create drumsounds
+    2) sequence grooves
+    3) send midi 
+ */
+
+/*
+5) Equalizer
 5 properties:
     1)
     2)
@@ -187,7 +247,7 @@ struct CarWash //2)
  */
 
 /*
-2)
+6) Phaser
 5 properties:
     1)
     2)
@@ -201,7 +261,7 @@ struct CarWash //2)
  */
 
 /*
-3)
+7) Flanger
 5 properties:
     1)
     2)
@@ -215,7 +275,7 @@ struct CarWash //2)
  */
 
 /*
-4)
+8) Chorus
 5 properties:
     1)
     2)
@@ -229,7 +289,7 @@ struct CarWash //2)
  */
 
 /*
-5)
+9) Reverb
 5 properties:
     1)
     2)
@@ -243,63 +303,7 @@ struct CarWash //2)
  */
 
 /*
-6)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-7)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-8)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-9)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-10)
+10) Distortion
 5 properties:
     1)
     2)
