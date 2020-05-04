@@ -79,17 +79,17 @@ You are going to write 10 UDTs in project3.
 
 
 /*
-3) - Synthesizer
+3) Phaser
 5 properties:
-    1) oscillator
-    2) adsr
-    3) filter
-    4) midi input / output
-    5) audio output
+    1) poles
+    2) color
+    3) envelope
+    4) lfo
+    5) feedback
 3 things it can do:
-    1) create sounds
-    2) send midi
-    3) manipulate the sound with adsr evelopes
+    1) phasing sounds
+    2) make stereo effects
+    3) manipulate the sound with lfo
  */
 
 /*
@@ -107,18 +107,90 @@ You are going to write 10 UDTs in project3.
  */
 
 /*
-Thing 10)
+5) Oscillator
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) volume
+    2) sin
+    3) square
+    4) triangle
+    5) noise
 3 things it can do:
-    1)
-    2)
-    3)
+    1) create waveforms
+    2) design sounds
+    3) change volume
  */
+
+ /*
+6) Adsr
+5 properties:
+    1) attach
+    2) decay
+    3) sustain
+    4) release
+    5) amount
+3 things it can do:
+    1) define attack of a sound
+    2) decay a sound
+    3) define the release of a sound
+ */
+
+ /*
+7) Midi
+5 properties:
+    1) value
+    2) channel
+    3) inpout
+    4) output
+    5) sync type
+3 things it can do:
+    1) send midi
+    2) receive midi
+    3) controll instruments
+ */
+
+ /*
+8) Lfo
+5 properties:
+    1) rate
+    2) amount
+    3) waveform
+    4) adsr
+    5) retrigger
+3 things it can do:
+    1) create waveform
+    2) controll other parameters with waveform
+    3) define waveform with adsr
+ */
+
+ /*
+9) Sampler
+5 properties:
+    1) sample slot
+    2) start
+    3) loop
+    4) lenght
+    5) fade
+3 things it can do:
+    1) play sample
+    2) set start point
+    3) loop sound
+ */
+
+/*
+Thing 10) Synthesizer
+5 properties:
+    1) oscillator
+    2) adsr
+    3) filter
+    4) midi 
+    5) lfo
+3 things it can do:
+    1) create sounds
+    2) send midi
+    3) manipulate the sound with adsr evelopes
+ */
+
+
 
 
 /*
