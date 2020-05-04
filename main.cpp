@@ -1,5 +1,5 @@
 /*
-Project 3 - Part 1c / 5
+Project 3 - Part 1e / 5
 Video:  Chapter 2 Part 5
 User-Defined Types
 
@@ -20,33 +20,98 @@ You are going to write 10 UDTs in project3.
     Part 1e: you will convert those 10 plain-english UDTs into code that runs.
 ************************
 
-1) write the 10th UDT
-    come up with an object that is made of 5 smaller parts.
-    
-    Here is an example:
-    Cell Phone
+Convert your 10 Plain-english UDTs into code.
 
-    A Cell Phone is made up of the following 5 properties:
-        Display
-        Memory
-        CPU
-        Radio
-        Applications
+I recommend compiling after finishing each one and making sure it compiles 
+without errors or warnings before moving on to writing the next UDT. 
 
-    A Cell Phone has 3 things it can do:
-        make a call
-        send a text
-        run an application.
-
-    Notice that I did not use "has a display" or "Has memory" or "has a cpu" as one of the properties of the CellPhone
-    
-    Writing 'has a ___" checks whether or not your object **has the ability to do something**.
-    Instead, I wrote "Display" or "CPU".  These are specific objects or amounts. 
-    
-    In C++ terms, this means to I want you to avoid using 'bool' (has a) as a member variable type.
-    Instead, prefer the other primitive types.
+1) define an empty struct for each of your 10 types. i.e.:
 */
+struct CellPhone
+{
 
+};
+/*
+2) Copy your 5 properties & 3 actions into the empty struct body.
+    - comment them out.
+    
+3) declare your member variables and member functions underneath each plain-english comment in your struct's body.
+    - give the member variables relevant data types
+ 
+4) make the function parameter list for those member functions use some of your User-Defined Types
+    - You'll write definitions/implementations for these functions in Project3 Part2
+    - you'll call each of these functions in Project3 part3
+ 
+5) make 2 of the 10 user-defined types have a nested class.  
+    - this nested class also needs 5 properties and 3 actions.
+    - these nested classes are not considered one of your 10 UDTs.
+    - this nested class must be related to the class it is nested inside
+ 
+6) your 10th UDT's properties should be instances of your #5-#9 UDTs.   
+    - No primitives allowed!
+ 
+7) After you finish defining each type, click the [run] button.  
+    Clear up any errors or warnings as best you can. 
+ */
+
+/*
+ example:  
+
+Thing: Car Wash   
+    5 properties:
+        - number of vacuum cleaners
+        - number of eco-friendly cleaning supplies
+        - stores the amount of water used per week.
+        - stores amount of profit made per week
+        - number of cars serviced per day
+    3 things it can do:
+        - wash and wax car
+        - charge customer
+        - detail the car interior
+ */
+
+#include <iostream>
+#include <string>
+
+struct CarWash //                                   1) define an empty struct for each of your 10 types.       
+{
+    //number of vacuum cleaners                     2) copied and commented-out plain-english property
+    int numVacuumCleaners = 3; //                   3) member variables with relevant data types.
+    //number of eco-friendly cleaning supplies      
+    int numEcoFriendlyCleaningSupplies = 20;     
+    //stores the amount of water used per week.     
+    float waterUsedPerWeek = 200.f;            
+    //stores amount of profit made per week         
+    float profitPerWeek = 495.95f;               
+    //number of cars serviced per day               
+    int numberOfCarsServiced = 10;               
+    
+    struct Car //5)                                 Note that the nested type 'Car' is related to the 'CarWash' 
+    {
+        //2) member variables with relevant data types.  the names are appropriate for the U.D.T.'s purpose.
+        bool isAPickupTruck = false;
+        float gasMileage = 26.2f;        
+        int year = 1985;
+        std::string manufacturer = "Toyota";
+        std::string model = "Corolla";
+
+        //3) a member function whose parameter has a default value.
+        //the parameter name is related to the work the function will perform.
+        void fillTank(double fuelAmountInGallons = 2.0);  
+        void breakDown(std::string failureType, bool requiresTow = false);
+        int getMilesTraveledAnnually(bool includeUberLyftTrips);
+    };
+
+    //wash and wax car
+    void washAndWaxCar( Car car ); //4) a member function whose parameter is a UDT.
+    //charge customer
+    float chargeCustomer(float discountPercentage);
+    //detail the car interior
+    void detailInterior( Car car );
+    
+    //5) a member variable whose type is a UDT.
+    Car carBeingServiced;  
+};
 
 /*
 1) Delay
