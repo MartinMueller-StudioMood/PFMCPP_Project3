@@ -32,7 +32,7 @@ struct CellPhone
 
 };
 
-
+/*
  2) define your struct for each of your 10 types. 
     - Copy your 3 actions & 5 traits into your struct body.
     - comment them out.
