@@ -80,7 +80,7 @@ struct CarWash //                                   1) define an empty struct fo
     //number of vacuum cleaners                     2) copied and commented-out plain-english property
     int numVacuumCleaners = 3; //                   3) member variables with relevant data types.
     //number of eco-friendly cleaning supplies      
-    int numEcoFriendlyCleaningSupplies = 20;     
+    double numEcoFriendlyCleaningSupplies = 20;     
     //stores the amount of water used per week.     
     float waterUsedPerWeek = 200.f;            
     //stores amount of profit made per week         
@@ -139,7 +139,7 @@ struct Delay
     //has repeat knob
     int repeat = 10; //3) member variables with relevant data types.
     //has spread knob
-    int spread = 50; //3) member variables with relevant data types.
+    double spread = 50.0; //3) member variables with relevant data types.
     //has dry/wet knob
     int dryWet = 100; //3) member variables with relevant data types.
     
@@ -161,11 +161,11 @@ struct Delay
     */
 
     //2) repeat signal
-    void repeatSignal( Echo echo );
+    int repeatSignal( Echo echo );
     //2) feedback the signal
     float feedbackSignal();
     //2) spread the signal
-    void spreadSignal( Echo echo );
+    double spreadSignal( Echo echo );
     
                
     //5) a member variable whose type is a UDT.
@@ -195,7 +195,7 @@ struct Filter
     //has resonance knob
     float resonanceKnob = 127.0f; //3) member variables with relevant data types.
     //has modulation knob
-    int modulationKnob = 127; //3) member variables with relevant data types.
+    double modulationKnob = 127.0; //3) member variables with relevant data types.
     //has lfo knob
     int lfoKnob = 127; //3) member variables with relevant data types.
     //has filter typ knob
@@ -210,7 +210,7 @@ struct Filter
 
         //3) a member function whose parameter has a default value.
         //the parameter name is related to the work the function will perform.
-        void filterSignal(double resonanceAmount = 3.0);   
+        double filterSignal(double resonanceAmount = 3.0);   
     };
 
     /* 
@@ -219,11 +219,11 @@ struct Filter
     */
 
     //2) cut out frequencies
-    void cutSignal( Filter filter );
+    int cutSignal( Filter filter );
     //2) modulate frequencies
     float modulateFrequencies();
     //2) color the sound
-    void colorSound( Filter filter );
+    float colorSound( Filter filter );
     
                
     //5) a member variable whose type is a UDT.
@@ -248,13 +248,13 @@ struct Filter
 struct Phaser       
 {
     //has poles knob
-    int polesKnob = 5; //3) member variables with relevant data types.
+    double polesKnob = 5; //3) member variables with relevant data types.
     //has color knob
     float colorKnob = 127.0f; //3) member variables with relevant data types.
     //has modulation knob
     int envelopeKnob = 127; //3) member variables with relevant data types.
     //has lfo knob
-    int lfoKnob = 127; //3) member variables with relevant data types.
+    float lfoKnob = 127.0f; //3) member variables with relevant data types.
     //has feedback knob
     int feedbackKnob = 127; //3) member variables with relevant data types.
 
@@ -264,11 +264,11 @@ struct Phaser
     */
 
     //2) phasing sounds
-    void phasingSound();
+    int phasingSound();
     //2) make stereo effects
     void stereoEffects();
     //2) manipulate the sound with lfo
-    void lfo();
+    double lfo(double time);
 
 };
 
@@ -307,11 +307,11 @@ struct DrumMachine
     */
 
     //2) create drumsounds
-    void drumSounds();
+    int drumSounds();
     //2) make grooves
-    void grooves();
+    int grooves();
     //2) send midi 
-    void sendMidi();
+    bool sendMidi();
 
 };
 
@@ -335,13 +335,13 @@ struct Oscillator
     //has volume
     int volume = 127; //3) member variables with relevant data types.
     //has sin
-    int sin = 127; //3) member variables with relevant data types.
+    double sin = 127.0; //3) member variables with relevant data types.
     //has square
-    int square = 23; //3) member variables with relevant data types.
+    double square = 23.0; //3) member variables with relevant data types.
     //has triangle
-    int triangle = 27; //3) member variables with relevant data types.
+    double triangle = 27.0; //3) member variables with relevant data types.
     //has noise
-    int noise = 127; //3) member variables with relevant data types.
+    float noise = 127.0f; //3) member variables with relevant data types.
 
     /* 
     member functions with a user-defined type as the parameter.
@@ -349,11 +349,11 @@ struct Oscillator
     */
 
     //2) create waveforms
-    void waveform();
+    int waveform();
     //2) design sounds
-    void sounds();
+    bool sounds();
     //2) change volume 
-    void changeVolume();
+    int changeVolume();
 
 };
 
@@ -382,7 +382,7 @@ struct Adsr
     //has release
     int release = 27; //3) member variables with relevant data types.
     //has amount
-    int amount = 127; //3) member variables with relevant data types.
+    float amount = 127.0; //3) member variables with relevant data types.
 
     /* 
     member functions with a user-defined type as the parameter.
@@ -390,11 +390,11 @@ struct Adsr
     */
 
     //2) define attack of a sound
-    void changeAttack();
+    int changeAttack();
     //2) decay a sound
-    void changeDecay();
+    int changeDecay();
     //2) define the release of a sound
-    void changeRelease();
+    int changeRelease();
 
 };
 
@@ -424,19 +424,29 @@ struct Midi
     //has output
     int output = 127; //3) member variables with relevant data types.
     //has sync type
-    int syncType = 127; //3) member variables with relevant data types.
+    bool syncType = true; //3) member variables with relevant data types.
 
+    struct MidiMessage   
+    {
+        //2) member variables with relevant data types.  the names are appropriate for the U.D.T.'s purpose.
+        bool isAnabled = false;
+        int midiChannel = 1;        
+
+        //3) a member function whose parameter has a default value.
+        //the parameter name is related to the work the function will perform.
+        void sendSignal(int midiMessage);   
+    };
     /* 
     member functions with a user-defined type as the parameter.
     The user-defined type parameter happens to be the nested class.
     */
 
     //2) send midi
-    void sendMidi();
+    void sendMidi(MidiMessage);
     //2) receive midi
-    void receiveMidi();
+    void receiveMidi(MidiMessage);
     //2) controll instruments
-    void controllInstrument();
+    void controllInstrument(MidiMessage);
 
 };
 
@@ -461,23 +471,23 @@ struct Lfo
     //has amount
     int amount = 127; //3) member variables with relevant data types.
     //has waveform
-    int waveform = 127; //3) member variables with relevant data types.
+    float waveform = 127.0; //3) member variables with relevant data types.
     //has adsr
     int adsr = 127; //3) member variables with relevant data types.
     //has retrigger
-    int retrigger = 127; //3) member variables with relevant data types.
+    double retrigger = 127.0; //3) member variables with relevant data types.
 
     /* 
     member functions with a user-defined type as the parameter.
     The user-defined type parameter happens to be the nested class.
     */
 
-    //2) create waveform
-    void createWaveform();
-    //2) controll other parameters with waveform
-    void sendWaveform();
-    //2) define waveform with adsr
-    void defineWaveformAdsr();
+    //2) set rate
+    void setRate();
+    //2) get amount
+    int getAmount();
+    //2) get retrigger
+    double getRetrigger();
 };
 
  /*
@@ -499,13 +509,13 @@ struct Sampler
     //has sample slot
     int sampleSlot = 127; //3) member variables with relevant data types.
     //has start
-    int start = 127; //3) member variables with relevant data types.
+    int startSample = 127; //3) member variables with relevant data types.
     //has loop
-    int loop = 127; //3) member variables with relevant data types.
+    bool isLooped = true; //3) member variables with relevant data types.
     //has lenght
-    int lenght = 127; //3) member variables with relevant data types.
+    float loopLength = 127.0f; //3) member variables with relevant data types.
     //has fade
-    int fade = 127; //3) member variables with relevant data types.
+    double fadeLengthInMilliseconds = 127.0; //3) member variables with relevant data types.
 
     /* 
     member functions with a user-defined type as the parameter.
