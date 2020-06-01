@@ -31,8 +31,10 @@ struct CellPhone
 {
 
 };
+
 /*
-2) Copy your 5 properties & 3 actions into the empty struct body.
+ 2) define your struct for each of your 10 types. 
+    - Copy your 3 actions & 5 traits into your struct body.
     - comment them out.
     
 3) declare your member variables and member functions underneath each plain-english comment in your struct's body.
@@ -78,7 +80,7 @@ struct CarWash //                                   1) define an empty struct fo
     //number of vacuum cleaners                     2) copied and commented-out plain-english property
     int numVacuumCleaners = 3; //                   3) member variables with relevant data types.
     //number of eco-friendly cleaning supplies      
-    int numEcoFriendlyCleaningSupplies = 20;     
+    double numEcoFriendlyCleaningSupplies = 20;     
     //stores the amount of water used per week.     
     float waterUsedPerWeek = 200.f;            
     //stores amount of profit made per week         
@@ -128,6 +130,49 @@ struct CarWash //                                   1) define an empty struct fo
  */
 
 
+struct Delay       
+{
+    //has time knob
+    int timeKnob = 63; //3) member variables with relevant data types.
+    //has feedback knob
+    float feedback = 127.0f; //3) member variables with relevant data types.
+    //has repeat knob
+    int repeat = 10; //3) member variables with relevant data types.
+    //has spread knob
+    double spread = 50.0; //3) member variables with relevant data types.
+    //has dry/wet knob
+    int dryWet = 100; //3) member variables with relevant data types.
+    
+    //5) make 2 of the 10 user-defined types have a nested class. 
+    struct Echo   
+    {
+        //2) member variables with relevant data types.  the names are appropriate for the U.D.T.'s purpose.
+        bool isAnabled = false;
+        float echoTime = 20.0f;        
+
+        //3) a member function whose parameter has a default value.
+        //the parameter name is related to the work the function will perform.
+        void repeatSignal(double echoSpeed = 3.0);   
+    };
+
+    /* 
+    member functions with a user-defined type as the parameter.
+    The user-defined type parameter happens to be the nested class.
+    */
+
+    //2) repeat signal
+    int repeatSignal( Echo echo );
+    //2) feedback the signal
+    float feedbackSignal();
+    //2) spread the signal
+    double spreadSignal( Echo echo );
+    
+               
+    //5) a member variable whose type is a UDT.
+    Echo echoRunning;  
+};
+
+
 /*
 2) Filter
 5 properties:
@@ -141,6 +186,49 @@ struct CarWash //                                   1) define an empty struct fo
     2) modulate frequencies
     3) color the sound 
  */
+
+
+struct Filter       
+{
+    //has frequence knob
+    float frequenceKnob = 12456.58f; //3) member variables with relevant data types.
+    //has resonance knob
+    float resonanceKnob = 127.0f; //3) member variables with relevant data types.
+    //has modulation knob
+    double modulationKnob = 127.0; //3) member variables with relevant data types.
+    //has lfo knob
+    int lfoKnob = 127; //3) member variables with relevant data types.
+    //has filter typ knob
+    int filterTypKnob = 100; //3) member variables with relevant data types.
+    
+    //5) make 2 of the 10 user-defined types have a nested class. 
+    struct Bandpass   
+    {
+        //2) member variables with relevant data types.  the names are appropriate for the U.D.T.'s purpose.
+        bool isAnabled = false;
+        float bandFrequency = 10.0f;        
+
+        //3) a member function whose parameter has a default value.
+        //the parameter name is related to the work the function will perform.
+        double filterSignal(double resonanceAmount = 3.0);   
+    };
+
+    /* 
+    member functions with a user-defined type as the parameter.
+    The user-defined type parameter happens to be the nested class.
+    */
+
+    //2) cut out frequencies
+    int cutSignal( Filter filter );
+    //2) modulate frequencies
+    float modulateFrequencies();
+    //2) color the sound
+    float colorSound( Filter filter );
+    
+               
+    //5) a member variable whose type is a UDT.
+    Bandpass bandpassRunning;  
+};
 
 
 /*
@@ -157,6 +245,35 @@ struct CarWash //                                   1) define an empty struct fo
     3) manipulate the sound with lfo
  */
 
+struct Phaser       
+{
+    //has poles knob
+    double polesKnob = 5; //3) member variables with relevant data types.
+    //has color knob
+    float colorKnob = 127.0f; //3) member variables with relevant data types.
+    //has modulation knob
+    int envelopeKnob = 127; //3) member variables with relevant data types.
+    //has lfo knob
+    float lfoKnob = 127.0f; //3) member variables with relevant data types.
+    //has feedback knob
+    int feedbackKnob = 127; //3) member variables with relevant data types.
+
+    /* 
+    member functions with a user-defined type as the parameter.
+    The user-defined type parameter happens to be the nested class.
+    */
+
+    //2) phasing sounds
+    int phasingSound();
+    //2) make stereo effects
+    void stereoEffects();
+    //2) manipulate the sound with lfo
+    double lfo(double time);
+
+};
+
+
+
 /*
 4) DrumMachine
 5 properties:
@@ -170,6 +287,33 @@ struct CarWash //                                   1) define an empty struct fo
     2) sequence grooves
     3) send midi 
  */
+
+struct DrumMachine       
+{
+    //has bassdrum
+    int bassdrum = 12; //3) member variables with relevant data types.
+    //has snare
+    int snare = 8; //3) member variables with relevant data types.
+    //has tom
+    int tom = 4; //3) member variables with relevant data types.
+    //has hihat
+    int hihat = 5; //3) member variables with relevant data types.
+    //has sequencer
+    int sequencer = 127; //3) member variables with relevant data types.
+
+    /* 
+    member functions with a user-defined type as the parameter.
+    The user-defined type parameter happens to be the nested class.
+    */
+
+    //2) create drumsounds
+    int drumSounds();
+    //2) make grooves
+    int grooves();
+    //2) send midi 
+    bool sendMidi();
+
+};
 
 /*
 5) Oscillator
@@ -185,10 +329,38 @@ struct CarWash //                                   1) define an empty struct fo
     3) change volume
  */
 
+
+struct Oscillator       
+{
+    //has volume
+    int volume = 127; //3) member variables with relevant data types.
+    //has sin
+    double sin = 127.0; //3) member variables with relevant data types.
+    //has square
+    double square = 23.0; //3) member variables with relevant data types.
+    //has triangle
+    double triangle = 27.0; //3) member variables with relevant data types.
+    //has noise
+    float noise = 127.0f; //3) member variables with relevant data types.
+
+    /* 
+    member functions with a user-defined type as the parameter.
+    The user-defined type parameter happens to be the nested class.
+    */
+
+    //2) create waveforms
+    int waveform();
+    //2) design sounds
+    bool sounds();
+    //2) change volume 
+    int changeVolume();
+
+};
+
  /*
 6) Adsr
 5 properties:
-    1) attach
+    1) attack
     2) decay
     3) sustain
     4) release
@@ -199,12 +371,39 @@ struct CarWash //                                   1) define an empty struct fo
     3) define the release of a sound
  */
 
+struct Adsr       
+{
+    //has attack
+    int attack = 127; //3) member variables with relevant data types.
+    //has decay
+    int decay = 127; //3) member variables with relevant data types.
+    //has sustain
+    int sustain = 23; //3) member variables with relevant data types.
+    //has release
+    int release = 27; //3) member variables with relevant data types.
+    //has amount
+    float amount = 127.0; //3) member variables with relevant data types.
+
+    /* 
+    member functions with a user-defined type as the parameter.
+    The user-defined type parameter happens to be the nested class.
+    */
+
+    //2) define attack of a sound
+    int changeAttack();
+    //2) decay a sound
+    int changeDecay();
+    //2) define the release of a sound
+    int changeRelease();
+
+};
+
  /*
 7) Midi
 5 properties:
     1) value
     2) channel
-    3) inpout
+    3) input
     4) output
     5) sync type
 3 things it can do:
@@ -212,6 +411,44 @@ struct CarWash //                                   1) define an empty struct fo
     2) receive midi
     3) controll instruments
  */
+
+
+struct Midi       
+{
+    //has value
+    int value = 127; //3) member variables with relevant data types.
+    //has channel
+    int channel = 127; //3) member variables with relevant data types.
+    //has input
+    int input = 127; //3) member variables with relevant data types.
+    //has output
+    int output = 127; //3) member variables with relevant data types.
+    //has sync type
+    bool syncType = true; //3) member variables with relevant data types.
+
+    struct MidiMessage   
+    {
+        //2) member variables with relevant data types.  the names are appropriate for the U.D.T.'s purpose.
+        bool isAnabled = false;
+        int midiChannel = 1;        
+
+        //3) a member function whose parameter has a default value.
+        //the parameter name is related to the work the function will perform.
+        void sendSignal(int midiMessage);   
+    };
+    /* 
+    member functions with a user-defined type as the parameter.
+    The user-defined type parameter happens to be the nested class.
+    */
+
+    //2) send midi
+    void sendMidi(MidiMessage);
+    //2) receive midi
+    void receiveMidi(MidiMessage);
+    //2) controll instruments
+    void controllInstrument(MidiMessage);
+
+};
 
  /*
 8) Lfo
@@ -227,6 +464,32 @@ struct CarWash //                                   1) define an empty struct fo
     3) define waveform with adsr
  */
 
+struct Lfo       
+{
+    //has rate
+    int rate = 127; //3) member variables with relevant data types.
+    //has amount
+    int amount = 127; //3) member variables with relevant data types.
+    //has waveform
+    float waveform = 127.0; //3) member variables with relevant data types.
+    //has adsr
+    int adsr = 127; //3) member variables with relevant data types.
+    //has retrigger
+    double retrigger = 127.0; //3) member variables with relevant data types.
+
+    /* 
+    member functions with a user-defined type as the parameter.
+    The user-defined type parameter happens to be the nested class.
+    */
+
+    //2) set rate
+    void setRate();
+    //2) get amount
+    int getAmount();
+    //2) get retrigger
+    double getRetrigger();
+};
+
  /*
 9) Sampler
 5 properties:
@@ -241,6 +504,32 @@ struct CarWash //                                   1) define an empty struct fo
     3) loop sound
  */
 
+struct Sampler       
+{
+    //has sample slot
+    int sampleSlot = 127; //3) member variables with relevant data types.
+    //has start
+    int startSample = 127; //3) member variables with relevant data types.
+    //has loop
+    bool isLooped = true; //3) member variables with relevant data types.
+    //has lenght
+    float loopLength = 127.0f; //3) member variables with relevant data types.
+    //has fade
+    double fadeLengthInMilliseconds = 127.0; //3) member variables with relevant data types.
+
+    /* 
+    member functions with a user-defined type as the parameter.
+    The user-defined type parameter happens to be the nested class.
+    */
+
+    //2) play sample
+    void playSample();
+    //2) set start point
+    void setStartPoint();
+    //2) loop sound
+    void loopSound();
+};
+
 /*
 Thing 10) Synthesizer
 5 properties:
@@ -253,6 +542,7 @@ Thing 10) Synthesizer
     1) create sounds
     2) send midi
     3) manipulate the sound with adsr evelopes
+
  */
 
 
@@ -270,7 +560,35 @@ Thing 10) Synthesizer
  send me a DM to review your pull request when the project is ready for review.
 
  Wait for my code review.
+
  */
+
+ struct Synthesizer       
+{
+    //has oscillator
+    Oscillator oscillator; //3) member variables with relevant data types.
+    //has adsr
+    Adsr adsr; //3) member variables with relevant data types.
+    //has filter
+    Filter filter; //3) member variables with relevant data types.
+    //has midi
+    Midi midi; //3) member variables with relevant data types.
+    //has lfo
+    Lfo lfo; //3) member variables with relevant data types.
+
+    /* 
+    member functions with a user-defined type as the parameter.
+    The user-defined type parameter happens to be the nested class.
+    */
+
+    //2) create sounds
+    void createSounds();
+    //2) send midi
+    void sendMidi();
+    //2) manipulate the sound with adsr evelopes
+    void manipulateSoundAdsr();
+};
+
 
 #include <iostream>
 int main()
