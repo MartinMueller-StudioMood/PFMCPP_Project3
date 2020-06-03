@@ -109,8 +109,53 @@ struct CarWash
     You'll need to insert the Person struct from the video in the space below.
  */
 
+struct Person 
+{
+int age;
+int height; 
+float hairLength;
+float GPA;
+unsigned int SATScore;
+int distanceTraveled;
+float speed;
 
 
+    struct Foot   
+    {
+        int steps;
+        int size = 30;
+
+        void stepForward()
+        {
+            steps++;
+        }
+        int stepSize()
+        {
+            return size;  
+        }
+    };
+
+Foot leftFoot;
+Foot rightFoot;
+
+void run(int howFast, bool startWithLeftFood);
+};
+
+void Person::run(int howFast, bool startWithLeftFood)
+{
+    if(startWithLeftFood)
+    {
+       leftFoot.stepForward();
+       rightFoot.stepForward();
+    }
+    else
+    {
+       rightFoot.stepForward();
+       leftFoot.stepForward();
+    }
+    distanceTraveled += leftFoot.stepSize() + rightFoot.stepSize();
+    speed = float(howFast)*1.2f;
+}
 
 
  /*
@@ -121,480 +166,370 @@ struct CarWash
  
  4) After you finish defining each type/function, click the [run] button.  Clear up any errors or warnings as best you can.
  */
-
-
-/*
-1) Delay
-5 properties:
-    1) time knob
-    2) feedback knob
-    3) repeat knob
-    4) spread knob
-    5) dry/wet knob
-3 things it can do:
-    1) repeat the signal
-    2) feedback the signal
-    3) spread the signal
- */
-
+#include <iostream>
+using namespace std;
 
 struct Delay       
 {
-    //has time knob
-    int timeKnob = 63; //3) member variables with relevant data types.
-    //has feedback knob
-    float feedback = 127.0f; //3) member variables with relevant data types.
-    //has repeat knob
-    int repeat = 10; //3) member variables with relevant data types.
-    //has spread knob
-    double spread = 50.0; //3) member variables with relevant data types.
-    //has dry/wet knob
-    int dryWet = 100; //3) member variables with relevant data types.
-    
-    //5) make 2 of the 10 user-defined types have a nested class. 
+    int timeKnob = 63;
+    float feedback = 127.0f;
+    int repeat = 10;
+    double spread = 50.0; 
+    int dryWet = 100;
+
     struct Echo   
     {
-        //2) member variables with relevant data types.  the names are appropriate for the U.D.T.'s purpose.
-        bool isAnabled = false;
-        float echoTime = 20.0f;        
+        bool isEnabled = false;
+        float echoTime = 20.47f;  
+        double stereo = 10;      
 
-        //3) a member function whose parameter has a default value.
-        //the parameter name is related to the work the function will perform.
         void repeatSignal(double echoSpeed = 3.0);   
     };
 
-    /* 
-    member functions with a user-defined type as the parameter.
-    The user-defined type parameter happens to be the nested class.
-    */
+    float repeatSignal( Echo echo )
+    {
+        float speed = 10.8f + echo.echoTime / 360.0f;
+        echo.repeatSignal();
+        return speed;
+    }
 
-    //2) repeat signal
-    int repeatSignal( Echo echo );
-    //2) feedback the signal
-    float feedbackSignal();
-    //2) spread the signal
-    double spreadSignal( Echo echo );
-    
-               
-    //5) a member variable whose type is a UDT.
+    double calculateFeedback(double echoFeedback)
+    {
+        double feedbackSignal = echoFeedback * double(repeat)/7.89;
+        return feedbackSignal;
+    }
+
+    double spreadSignal( Echo echo  )
+    {
+        if (echo.isEnabled){
+            echo.stereo += spread;
+        }
+        return echo.stereo;
+    }
+
     Echo echoRunning;  
 };
 
-
-/*
-2) Filter
-5 properties:
-    1) frequence knob
-    2) resonance knob
-    3) modulation knob
-    4) lfo knob
-    5) filter typ knob
-3 things it can do:
-    1) cut out frequencies 
-    2) modulate frequencies
-    3) color the sound 
- */
-
-
 struct Filter       
 {
-    //has frequence knob
-    float frequenceKnob = 12456.58f; //3) member variables with relevant data types.
-    //has resonance knob
-    float resonanceKnob = 127.0f; //3) member variables with relevant data types.
-    //has modulation knob
-    double modulationKnob = 127.0; //3) member variables with relevant data types.
-    //has lfo knob
-    int lfoKnob = 127; //3) member variables with relevant data types.
-    //has filter typ knob
-    int filterTypKnob = 100; //3) member variables with relevant data types.
-    
-    //5) make 2 of the 10 user-defined types have a nested class. 
+    float frequenceKnob = 12456.58f;
+    float resonanceKnob = 127.0f; 
+    float saturationValue = 23.9f;
+    double modulationKnob = 127.0; 
+    int lfoKnob = 127;
+    int filterTypKnob = 100; 
+    bool lfoFilter = false; 
+
     struct Bandpass   
     {
-        //2) member variables with relevant data types.  the names are appropriate for the U.D.T.'s purpose.
         bool isAnabled = false;
-        float bandFrequency = 10.0f;        
+        float bandFrequency = 10.0f;       
 
-        //3) a member function whose parameter has a default value.
-        //the parameter name is related to the work the function will perform.
         double filterSignal(double resonanceAmount = 3.0);   
     };
 
-    /* 
-    member functions with a user-defined type as the parameter.
-    The user-defined type parameter happens to be the nested class.
-    */
+    float cutSignal( Filter filter ){
+        float filterFrequence = filter.frequenceKnob + 10.3f;
+        return filterFrequence;
+    }
 
-    //2) cut out frequencies
-    int cutSignal( Filter filter );
-    //2) modulate frequencies
-    float modulateFrequencies();
-    //2) color the sound
-    float colorSound( Filter filter );
-    
-               
-    //5) a member variable whose type is a UDT.
+    float modulateFrequencies(float lfoFrequence, Filter filter)
+    {
+        float filterFrequence = 0.0f;
+
+        if(lfoFilter)
+        {
+            filterFrequence = filter.frequenceKnob * lfoFrequence /100;
+        }
+        return filterFrequence;
+    }
+
+    float colorSound( Filter filter )
+    {
+        float colorFrequency = filter.frequenceKnob * saturationValue;
+
+        return colorFrequency;
+    }
+
     Bandpass bandpassRunning;  
 };
 
-
-/*
-3) Phaser
-5 properties:
-    1) poles
-    2) color
-    3) envelope
-    4) lfo
-    5) feedback
-3 things it can do:
-    1) phasing sounds
-    2) make stereo effects
-    3) manipulate the sound with lfo
- */
-
 struct Phaser       
 {
-    //has poles knob
-    double polesKnob = 5; //3) member variables with relevant data types.
-    //has color knob
-    float colorKnob = 127.0f; //3) member variables with relevant data types.
-    //has modulation knob
-    int envelopeKnob = 127; //3) member variables with relevant data types.
-    //has lfo knob
-    float lfoKnob = 127.0f; //3) member variables with relevant data types.
-    //has feedback knob
-    int feedbackKnob = 127; //3) member variables with relevant data types.
+    double polesKnob = 5; 
+    float colorKnob = 127.0f; 
+    int envelopeKnob = 127;
+    double lfoKnob = 127.0;
+    int feedbackKnob = 127; 
+    int stereo = 127;
 
-    /* 
-    member functions with a user-defined type as the parameter.
-    The user-defined type parameter happens to be the nested class.
-    */
 
-    //2) phasing sounds
-    int phasingSound();
-    //2) make stereo effects
-    void stereoEffects();
-    //2) manipulate the sound with lfo
-    double lfo(double time);
+    int phasingSound(int phaseFrequence)
+    {   
+        int phaseAmplitude = 0;
+        int i = 0;
+            while (i < 57) {
+            phaseAmplitude = phaseFrequence * i / int(polesKnob) * feedbackKnob;
+            i++;
+        }
+        return phaseAmplitude;
+    }
 
+    void stereoEffects(int frequence, int spread)
+    {
+        stereo = frequence * spread / 100;
+    }
+
+    double lfo(double time)
+    {
+        double lfoModulation = lfoKnob * double(envelopeKnob) / time;
+        
+        return lfoModulation;
+    }
 };
-
-
-
-/*
-4) DrumMachine
-5 properties:
-    1) bassdrum
-    2) snare
-    3) tom
-    4) hihat
-    5) sequencer
-3 things it can do:
-    1) create drumsounds
-    2) sequence grooves
-    3) send midi 
- */
 
 struct DrumMachine       
 {
-    //has bassdrum
-    int bassdrum = 12; //3) member variables with relevant data types.
-    //has snare
-    int snare = 8; //3) member variables with relevant data types.
-    //has tom
-    int tom = 4; //3) member variables with relevant data types.
-    //has hihat
-    int hihat = 5; //3) member variables with relevant data types.
-    //has sequencer
-    int sequencer = 127; //3) member variables with relevant data types.
+    int bassdrum = 12; 
+    int snare = 8; 
+    int tom = 4; 
+    int hihat = 5; 
+    int sequencer = 127; 
 
-    /* 
-    member functions with a user-defined type as the parameter.
-    The user-defined type parameter happens to be the nested class.
-    */
+    void drumSounds(int sampleNumber)
+    { 
+        switch (sampleNumber) {
+            case 1:
+                cout << "808";
+                break;
+            case 2:
+                cout << "909";
+                break;
+            case 3:
+                cout << "707";
+                break;
+            case 4:
+                cout << "606";
+                break;
+            case 5:
+                cout << "Linndrum";
+                break;
+            case 6:
+                cout << "505";
+                break;
+            case 7:
+                cout << "Oberheim";
+                break;
+        }
+    }
 
-    //2) create drumsounds
-    int drumSounds();
-    //2) make grooves
-    int grooves();
-    //2) send midi 
-    bool sendMidi();
+    int grooves(int shuffle)
+    {
+        for (int i = 0; i < 78; i++) {
+             shuffle = i * rand() % 100;  
+        }
+        return shuffle;
+    }
 
+    bool sendMidi(bool midiSend, bool midiInterface)
+    {   
+        if(midiSend & midiInterface){
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 };
-
-/*
-5) Oscillator
-5 properties:
-    1) volume
-    2) sin
-    3) square
-    4) triangle
-    5) noise
-3 things it can do:
-    1) create waveforms
-    2) design sounds
-    3) change volume
- */
-
 
 struct Oscillator       
 {
-    //has volume
-    int volume = 127; //3) member variables with relevant data types.
-    //has sin
-    double sin = 127.0; //3) member variables with relevant data types.
-    //has square
-    double square = 23.0; //3) member variables with relevant data types.
-    //has triangle
-    double triangle = 27.0; //3) member variables with relevant data types.
-    //has noise
-    float noise = 127.0f; //3) member variables with relevant data types.
+    int volume = 127; 
+    double sin = 127.0; 
+    double square = 23.0; 
+    double triangle = 27.0; 
+    float noise = 127.0f;
 
-    /* 
-    member functions with a user-defined type as the parameter.
-    The user-defined type parameter happens to be the nested class.
-    */
-
-    //2) create waveforms
-    int waveform();
-    //2) design sounds
-    bool sounds();
-    //2) change volume 
+    double waveform(int waveform)
+    {   
+        double modulatedWaveform = 0;
+        
+        if(waveform == 1)
+        {
+            modulatedWaveform = sin * 345;
+        }
+        else if(waveform == 2)
+        {
+            modulatedWaveform = square * 333;
+        }
+        else if(waveform == 3)
+        {
+            modulatedWaveform = triangle * 360;
+        }
+        return modulatedWaveform;
+    }
+    bool sounds(bool oscillatorOn)
+    {
+        if(oscillatorOn && sin >= 30)
+        {
+            oscillatorOn = true;
+        }
+        else
+        {
+            oscillatorOn = false;
+        }
+        return oscillatorOn;
+    }
     int changeVolume();
-
 };
-
- /*
-6) Adsr
-5 properties:
-    1) attack
-    2) decay
-    3) sustain
-    4) release
-    5) amount
-3 things it can do:
-    1) define attack of a sound
-    2) decay a sound
-    3) define the release of a sound
- */
 
 struct Adsr       
 {
-    //has attack
-    int attack = 127; //3) member variables with relevant data types.
-    //has decay
-    int decay = 127; //3) member variables with relevant data types.
-    //has sustain
-    int sustain = 23; //3) member variables with relevant data types.
-    //has release
-    int release = 27; //3) member variables with relevant data types.
-    //has amount
-    float amount = 127.0; //3) member variables with relevant data types.
+    int attack = 127;
+    int decay = 127;
+    int sustain = 23;
+    int release = 27; 
+    float amount = 127.0;
 
-    /* 
-    member functions with a user-defined type as the parameter.
-    The user-defined type parameter happens to be the nested class.
-    */
+    int changeAttack(int knobValue)
+    {
+        attack = knobValue * int(amount)/100;
+        return attack;
+    }
 
-    //2) define attack of a sound
-    int changeAttack();
-    //2) decay a sound
-    int changeDecay();
-    //2) define the release of a sound
-    int changeRelease();
+    int changeDecay(int knobValue)
+    {
+        decay = knobValue * int(amount)*23;
+        return decay;
+    }
 
+    int changeRelease(int knobValue)
+    {
+        release = knobValue/123*100;
+        return release;
+    }
 };
-
- /*
-7) Midi
-5 properties:
-    1) value
-    2) channel
-    3) input
-    4) output
-    5) sync type
-3 things it can do:
-    1) send midi
-    2) receive midi
-    3) controll instruments
- */
-
 
 struct Midi       
 {
-    //has value
-    int value = 127; //3) member variables with relevant data types.
-    //has channel
-    int channel = 127; //3) member variables with relevant data types.
-    //has input
-    int input = 127; //3) member variables with relevant data types.
-    //has output
-    int output = 127; //3) member variables with relevant data types.
-    //has sync type
-    bool syncType = true; //3) member variables with relevant data types.
+    int value = 127;
+    int channel = 127; 
+    int input = 127;
+    int output = 127;
+    bool syncType = true; 
 
     struct MidiMessage   
     {
-        //2) member variables with relevant data types.  the names are appropriate for the U.D.T.'s purpose.
-        bool isAnabled = false;
+        bool isEnabled = false;
         int midiChannel = 1;        
 
-        //3) a member function whose parameter has a default value.
-        //the parameter name is related to the work the function will perform.
-        void sendSignal(int midiMessage);   
+        void sendSignal(int midiMessage); 
+        void getSignal(); 
     };
-    /* 
-    member functions with a user-defined type as the parameter.
-    The user-defined type parameter happens to be the nested class.
-    */
 
-    //2) send midi
-    void sendMidi(MidiMessage);
-    //2) receive midi
-    void receiveMidi(MidiMessage);
-    //2) controll instruments
-    void controllInstrument(MidiMessage);
+
+    void sendMidi(MidiMessage midiMessage)
+    {
+        if(midiMessage.isEnabled)
+        {
+            midiMessage.sendSignal(value);
+        }
+    }
+    void receiveMidi(MidiMessage midiMessage)
+    {
+        if(midiMessage.isEnabled)
+        {
+            midiMessage.getSignal();
+        }
+    }
+    void enableMidi(bool enableMidi, MidiMessage midiMessage)
+    {
+        if(enableMidi){
+            midiMessage.isEnabled = true;
+        }
+    }
 
 };
 
- /*
-8) Lfo
-5 properties:
-    1) rate
-    2) amount
-    3) waveform
-    4) adsr
-    5) retrigger
-3 things it can do:
-    1) create waveform
-    2) controll other parameters with waveform
-    3) define waveform with adsr
- */
 
 struct Lfo       
 {
-    //has rate
-    int rate = 127; //3) member variables with relevant data types.
-    //has amount
-    int amount = 127; //3) member variables with relevant data types.
-    //has waveform
-    float waveform = 127.0; //3) member variables with relevant data types.
-    //has adsr
-    int adsr = 127; //3) member variables with relevant data types.
-    //has retrigger
-    double retrigger = 127.0; //3) member variables with relevant data types.
+    int rate = 127; 
+    int amount = 127; 
+    float waveform = 127.0; 
+    int adsr = 127; 
+    double retrigger = 127.0;
 
-    /* 
-    member functions with a user-defined type as the parameter.
-    The user-defined type parameter happens to be the nested class.
-    */
-
-    //2) set rate
-    void setRate();
-    //2) get amount
-    int getAmount();
-    //2) get retrigger
-    double getRetrigger();
+    void setRate(int value, int modulate)
+    {
+        rate = value + modulate;
+    }
+    int getAmount()
+    {
+        return amount;
+    }
+    double getRetrigger()
+    {
+        return retrigger * amount / rate;
+    }
 };
-
- /*
-9) Sampler
-5 properties:
-    1) sample slot
-    2) start
-    3) loop
-    4) lenght
-    5) fade
-3 things it can do:
-    1) play sample
-    2) set start point
-    3) loop sound
- */
 
 struct Sampler       
 {
-    //has sample slot
-    int sampleSlot = 127; //3) member variables with relevant data types.
-    //has start
-    int startSample = 127; //3) member variables with relevant data types.
-    //has loop
-    bool isLooped = true; //3) member variables with relevant data types.
-    //has lenght
-    float loopLength = 127.0f; //3) member variables with relevant data types.
-    //has fade
-    double fadeLengthInMilliseconds = 127.0; //3) member variables with relevant data types.
+    int retrigger = 127;
+    int startSample = 127; 
+    bool isLooped = true;
+    float loopLength = 127.0f; 
+    float loopSample = 0.0f;
+    double fadeLengthInMilliseconds = 127.0;
 
-    /* 
-    member functions with a user-defined type as the parameter.
-    The user-defined type parameter happens to be the nested class.
-    */
-
-    //2) play sample
-    void playSample();
-    //2) set start point
-    void setStartPoint();
-    //2) loop sound
-    void loopSound();
+    void playSample(bool play, int load)
+    {
+        if(play){
+            load = startSample*retrigger;
+        }      
+    }
+    void setStartPoint(int knobValue)
+    {
+        startSample = knobValue/100;
+    }
+    void loopSound(bool loop, int repeat)
+    {
+        if(loop){
+            loopSample = loopLength * float(repeat);
+        }
+    }
 };
 
-/*
-Thing 10) Synthesizer
-5 properties:
-    1) oscillator
-    2) adsr
-    3) filter
-    4) midi 
-    5) lfo
-3 things it can do:
-    1) create sounds
-    2) send midi
-    3) manipulate the sound with adsr evelopes
-
- */
-
-
-
-
-/*
- MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
-
- Commit your changes by clicking on the Source Control panel on the left, entering a message, and click [Commit and push].
- 
- If you didn't already: 
-    Make a pull request after you make your first commit
-    pin the pull request link and this repl.it link to our DM thread in a single message.
-
- send me a DM to review your pull request when the project is ready for review.
-
- Wait for my code review.
-
- */
-
- struct Synthesizer       
+struct Synthesizer       
 {
-    //has oscillator
-    Oscillator oscillator; //3) member variables with relevant data types.
-    //has adsr
-    Adsr adsr; //3) member variables with relevant data types.
-    //has filter
-    Filter filter; //3) member variables with relevant data types.
-    //has midi
-    Midi midi; //3) member variables with relevant data types.
-    //has lfo
-    Lfo lfo; //3) member variables with relevant data types.
+    Oscillator oscillator;
+    Adsr adsr; 
+    Filter filter; 
+    Midi midi; 
+    Lfo lfo; 
 
-    /* 
-    member functions with a user-defined type as the parameter.
-    The user-defined type parameter happens to be the nested class.
-    */
-
-    //2) create sounds
-    void createSounds();
-    //2) send midi
-    void sendMidi();
-    //2) manipulate the sound with adsr evelopes
-    void manipulateSoundAdsr();
+    void createSounds(Oscillator oscillatorSynth, int waveform)
+    {
+        oscillatorSynth.waveform(waveform);
+    }
+    void sendMidi(Midi midiSynth, Midi::MidiMessage midiMessage)
+    {
+        midiSynth.sendMidi(midiMessage);
+    }
+    void manipulateSoundAdsr(Adsr adsrSynth, int parameter, int knobValue)
+    { 
+        if(parameter == 0){
+            adsrSynth.changeAttack(knobValue);
+        }
+        else if(parameter == 1){
+            adsrSynth.changeDecay(knobValue);
+        }
+        else if(parameter == 2){
+            adsrSynth.changeRelease(knobValue);
+        }    
+    }
 };
 
 
