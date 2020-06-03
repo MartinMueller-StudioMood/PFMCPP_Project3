@@ -111,13 +111,13 @@ struct CarWash
 
 struct Person 
 {
-int age;
-int height; 
-float hairLength;
-float GPA;
-unsigned int SATScore;
-int distanceTraveled;
-float speed;
+    int age;
+    int height; 
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
+    int distanceTraveled;
+    float speed;
 
 
     struct Foot   
@@ -135,10 +135,10 @@ float speed;
         }
     };
 
-Foot leftFoot;
-Foot rightFoot;
+    Foot leftFoot;
+    Foot rightFoot;
 
-void run(int howFast, bool startWithLeftFood);
+    void run(int howFast, bool startWithLeftFood);
 };
 
 void Person::run(int howFast, bool startWithLeftFood)
@@ -201,7 +201,8 @@ struct Delay
 
     double spreadSignal( Echo echo  )
     {
-        if (echo.isEnabled){
+        if (echo.isEnabled)
+        {
             echo.stereo += spread;
         }
         return echo.stereo;
@@ -228,7 +229,8 @@ struct Filter
         double filterSignal(double resonanceAmount = 3.0);   
     };
 
-    float cutSignal( Filter filter ){
+    float cutSignal( Filter filter )
+    {
         float filterFrequence = filter.frequenceKnob + 10.3f;
         return filterFrequence;
     }
@@ -268,10 +270,11 @@ struct Phaser
     {   
         int phaseAmplitude = 0;
         int i = 0;
-            while (i < 57) {
-            phaseAmplitude = phaseFrequence * i / int(polesKnob) * feedbackKnob;
-            i++;
-        }
+            while (i < 57) 
+            {
+                phaseAmplitude = phaseFrequence * i / int(polesKnob) * feedbackKnob;
+                i++;
+            }
         return phaseAmplitude;
     }
 
@@ -333,7 +336,8 @@ struct DrumMachine
 
     bool sendMidi(bool midiSend, bool midiInterface)
     {   
-        if(midiSend & midiInterface){
+        if(midiSend & midiInterface)
+        {
             return true;
         }
         else
@@ -445,7 +449,8 @@ struct Midi
     }
     void enableMidi(bool enableMidi, MidiMessage midiMessage)
     {
-        if(enableMidi){
+        if(enableMidi)
+        {
             midiMessage.isEnabled = true;
         }
     }
@@ -486,7 +491,8 @@ struct Sampler
 
     void playSample(bool play, int load)
     {
-        if(play){
+        if(play)
+        {
             load = startSample*retrigger;
         }      
     }
@@ -496,7 +502,8 @@ struct Sampler
     }
     void loopSound(bool loop, int repeat)
     {
-        if(loop){
+        if(loop)
+        {
             loopSample = loopLength * float(repeat);
         }
     }
@@ -520,13 +527,16 @@ struct Synthesizer
     }
     void manipulateSoundAdsr(Adsr adsrSynth, int parameter, int knobValue)
     { 
-        if(parameter == 0){
+        if(parameter == 0)
+        {
             adsrSynth.changeAttack(knobValue);
         }
-        else if(parameter == 1){
+        else if(parameter == 1)
+        {
             adsrSynth.changeDecay(knobValue);
         }
-        else if(parameter == 2){
+        else if(parameter == 2)
+        {
             adsrSynth.changeRelease(knobValue);
         }    
     }
