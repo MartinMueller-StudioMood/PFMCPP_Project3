@@ -270,11 +270,11 @@ struct Phaser
     {   
         int phaseAmplitude = 0;
         int i = 0;
-            while (i < 57) 
-            {
-                phaseAmplitude = phaseFrequence * i / int(polesKnob) * feedbackKnob;
-                i++;
-            }
+        while (i < 57) 
+        {
+            phaseAmplitude = phaseFrequence * i / int(polesKnob) * feedbackKnob;
+            i++;
+        }
         return phaseAmplitude;
     }
 
